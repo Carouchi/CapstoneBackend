@@ -126,9 +126,25 @@ def login():
 
     return redirect('/blog')
 
+# Endpoint for user Registration
+class Register(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(200), unique=True)
+    password = db.Column(db.String(200), nullable=False)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    
+    form = Register()
+    
+    new_user = User(email=form.email.data, password=form.password.data)
+    db.session.add(new_user)
+    db.session.commit()
+
+    
 
 # Endpoint for user Logout
-@app.route ('/navigation')
+@app.route('/navigation')
 @login_required
 def logout():
     logout_user()
