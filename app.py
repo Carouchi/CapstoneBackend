@@ -1,6 +1,5 @@
 from enum import unique
 from importlib import resources
-import resource
 from flask import Flask, json, request, jsonify
 from flask.helpers import flash
 from flask.templating import render_template
