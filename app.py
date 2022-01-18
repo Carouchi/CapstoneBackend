@@ -30,8 +30,8 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 CORS(app)
 
-# login_manager = LoginManager()
-# login_manager.init_app(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)    
@@ -174,7 +174,6 @@ with app.app_context():
         db.session.add(User(
           email='example@gmail.com',
           password='example',
-          roles='admin'
             ))
     db.session.commit()
 
