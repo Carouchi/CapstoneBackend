@@ -1,4 +1,6 @@
 from enum import unique
+from importlib import resources
+import resource
 from flask import Flask, json, request, jsonify
 from flask.helpers import flash
 from flask.templating import render_template
@@ -9,13 +11,14 @@ from flask_login import UserMixin, LoginManager, login_manager, login_user, curr
 import os
 from werkzeug import routing
 from werkzeug.security import check_password_hash
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 from werkzeug.utils import redirect
 
 
 app = Flask(__name__)
-
+CORS(app,resources={r"/api/*":{"origins":"*"}})
+app.config['CORS HEADERS'] = 'Content-Type'
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
@@ -23,7 +26,6 @@ app.config['SECRET_KEY'] = 'secretkey'
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
-CORS(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -47,6 +49,7 @@ posts_schema = PostSchema(many=True)
 
 # Endpoint to create new post 
 @app.route('/blog', methods=["POST"])
+@cross_origin()
 def add_post():
     title = request.json['title']
     content = request.json['content']
@@ -63,6 +66,7 @@ def add_post():
 
 # Endpoint to query all posts
 @app.route('/blogs', methods=["GET"])
+@cross_origin()
 def get_posts():
     all_posts = Post.query.all()
     result = posts_schema.dump(all_posts)
@@ -70,6 +74,7 @@ def get_posts():
 
 # Endpoint for querying single post
 @app.route("/blog/<id>", methods=["GET"])
+@cross_origin()
 def get_post(id):
     post = Post.query.get(id)
     return post_schema.jsonify(post)
@@ -77,6 +82,7 @@ def get_post(id):
 
 # Endpoint for updating a post 
 @app.route("/blog/<id>", methods=["PUT"])
+@cross_origin()
 def post_update(id):
     post = Post.query.get(id)
     title = request.json['title']
@@ -91,6 +97,7 @@ def post_update(id):
 
 # Endpoint for deleting a record
 @app.route("/blog/<id>", methods=["DELETE"])
+@cross_origin()
 def post_delete(id):
     post = Post.query.get(id)
     db.session.delete(post)
@@ -113,6 +120,7 @@ def load_user(user_id):
 
 
 @app.route('/', methods=["POST"])
+@cross_origin()
 def login():
     
     #login_user(user)
@@ -136,6 +144,7 @@ class Register(db.Model):
     password = db.Column(db.String(200), nullable=False)
 
 @app.route('/register', methods=['GET', 'POST'])
+@cross_origin()
 def register():
     
     form = Register()
@@ -148,6 +157,7 @@ def register():
 
 # Endpoint for user Logout
 @app.route('/navigation')
+@cross_origin()
 @login_required
 def logout():
     logout_user()
