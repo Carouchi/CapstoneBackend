@@ -9,6 +9,7 @@ from flask_login import UserMixin, LoginManager, login_manager, login_user, curr
 import os
 from werkzeug import routing
 from werkzeug.security import check_password_hash
+from flask_cors import CORS
 
 from werkzeug.utils import redirect
 
@@ -21,6 +22,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'ap
 app.config['SECRET_KEY'] = 'secretkey'
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+
+CORS(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
