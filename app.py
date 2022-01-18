@@ -15,20 +15,21 @@ from flask_cors import CORS, cross_origin
 from werkzeug.utils import redirect
 
 
-app = Flask(__name__)
-CORS(app,resources={r"/api/*":{"origins":"*"}})
+# CORS(app,resources={r"/api/*":{"origins":"*"}})app = Flask(__name__)
 
-app.config['CORS HEADERS'] = 'Content-Type'
+
+# app.config['CORS HEADERS'] = 'Content-Type'
+app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
-app.config['SECRET_KEY'] = 'secretkey'
+# app.config['SECRET_KEY'] = 'secretkey'
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+CORS(app)
 
-
-login_manager = LoginManager()
-login_manager.init_app(app)
+# login_manager = LoginManager()
+# login_manager.init_app(app)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)    
@@ -144,7 +145,7 @@ class Register(db.Model):
     password = db.Column(db.String(200), nullable=False)
 
 @app.route('/register', methods=['GET', 'POST'])
- @cross_origin()
+@cross_origin()
 def register():
     
     form = Register()
