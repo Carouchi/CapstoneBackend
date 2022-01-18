@@ -168,14 +168,14 @@ def logout():
 
 
 # test add user
-with app.app_context():
-    db.create_all()
-    if db.session.query(User).filter_by(email='example@gmail.com').count() < 1:
-        db.session.add(User(
-          email='example@gmail.com',
-          password='example',
-            ))
-    db.session.commit()
+# with app.app_context():
+#     db.create_all()
+#     if db.session.query(User).filter_by(email='example@gmail.com').count() < 1:
+#         db.session.add(User(
+#           email='example@gmail.com',
+#           password='example',
+#             ))
+#     db.session.commit()
 
 
 if __name__ == '__main__':
