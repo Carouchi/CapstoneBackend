@@ -15,11 +15,12 @@ from flask_cors import CORS, cross_origin
 from werkzeug.utils import redirect
 
 
-# CORS(app,resources={r"/api/*":{"origins":"*"}})app = Flask(__name__)
+
 
 
 # app.config['CORS HEADERS'] = 'Content-Type'
 app = Flask(__name__)
+CORS(app,resources={r"/api/*":{"origins":"*"}}) 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
