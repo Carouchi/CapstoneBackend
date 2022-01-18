@@ -122,7 +122,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-@app.route('/', methods=["POST"])
+@app.route('/login', methods=["POST"])
 @cross_origin()
 def login():
     
@@ -165,6 +165,18 @@ def register():
 def logout():
     logout_user()
     return redirect('/')
+
+
+# test add user
+with app.app_context():
+    db.create_all()
+    if db.session.query(User).filter_by(email='example@gmail.com').count() < 1:
+        db.session.add(User(
+          email='example@gmail.com',
+          password='example',
+          roles='admin'
+            ))
+    db.session.commit()
 
 
 if __name__ == '__main__':
