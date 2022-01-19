@@ -22,7 +22,7 @@ from werkzeug.utils import redirect
 
 app = Flask(__name__)
 CORS(app,resources={r"/api/*":{"origins":"*"}}) 
-app.config['CORS HEADERS'] = 'Content-Type'
+app.config['CORS HEADERS'] = true
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
@@ -124,7 +124,7 @@ def load_user(user_id):
 
 
 @app.route('/login', methods=["POST"])
-@cross_origin('*')
+@cross_origin()
 def login():
     
     #login_user(user)
