@@ -26,7 +26,7 @@ app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
-# app.config['SECRET_KEY'] = 'secretkey'
+app.config['SECRET_KEY'] = 'secretkey'
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 CORS(app)
