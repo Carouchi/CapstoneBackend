@@ -53,7 +53,7 @@ posts_schema = PostSchema(many=True)
 
 # Endpoint to create new post 
 @app.route('/blog', methods=["POST"])
-@cross_origin()
+# @cross_origin()
 def add_post():
     title = request.json['title']
     content = request.json['content']
@@ -70,7 +70,7 @@ def add_post():
 
 # Endpoint to query all posts
 @app.route('/blogs', methods=["GET"])
-@cross_origin()
+# @cross_origin()
 def get_posts():
     all_posts = Post.query.all()
     result = posts_schema.dump(all_posts)
@@ -78,7 +78,7 @@ def get_posts():
 
 # Endpoint for querying single post
 @app.route("/blog/<id>", methods=["GET"])
-@cross_origin()
+# @cross_origin()
 def get_post(id):
     post = Post.query.get(id)
     return post_schema.jsonify(post)
@@ -86,7 +86,7 @@ def get_post(id):
 
 # Endpoint for updating a post 
 @app.route("/blog/<id>", methods=["PUT"])
-@cross_origin()
+# @cross_origin()
 def post_update(id):
     post = Post.query.get(id)
     title = request.json['title']
@@ -101,7 +101,7 @@ def post_update(id):
 
 # Endpoint for deleting a record
 @app.route("/blog/<id>", methods=["DELETE"])
-@cross_origin()
+# @cross_origin()
 def post_delete(id):
     post = Post.query.get(id)
     db.session.delete(post)
@@ -124,7 +124,7 @@ def load_user(user_id):
 
 
 @app.route('/login', methods=["POST"])
-@cross_origin()
+# @cross_origin()
 def login():
     
     #login_user(user)
