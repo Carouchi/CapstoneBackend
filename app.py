@@ -139,7 +139,7 @@ def login():
 
     login_user(user)
 
-    return redirect('/blog')
+    return redirect('/blogs')
 
 # Endpoint for user Registration
 # class Register(db.Model):
