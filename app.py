@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_login import UserMixin, LoginManager, login_manager, login_user, current_user
 import os
+from sqlalchemy import true
 from werkzeug import routing
 from werkzeug.security import check_password_hash
 from flask_cors import CORS, cross_origin
@@ -123,7 +124,7 @@ def load_user(user_id):
 
 
 @app.route('/login', methods=["POST"])
-@cross_origin()
+@cross_origin('*')
 def login():
     
     #login_user(user)
