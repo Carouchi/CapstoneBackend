@@ -8,7 +8,7 @@ from flask.templating import render_template
 from flask_login.utils import login_required, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from flask_login import UserMixin, LoginManager, login_manager, login_user, current_user
+from flask_login import UserMixin, LoginManager, login_manager, login_user, current_user, logout_user
 import os
 from sqlalchemy import true
 from werkzeug import routing
@@ -179,7 +179,7 @@ def login():
     
 
 # Endpoint for user Logout
-@app.route('/navigation',  methods=["GET"])
+@app.route('/navigation')
 def logout():
     logout_user()
     return redirect('/')
