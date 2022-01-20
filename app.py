@@ -131,15 +131,15 @@ def load_user(user_id):
 def login():
     
     #login_user(user)
-    email = request.form.get('email')
-    password = request.form.get('password')
+    post_data = request.get_json()
+    email = post_data.get('email')
+    password = post_data.get('password')
     
     user = db.session.query(User).filter(User.email == email).first()
     
     if user is None:
         return jsonify("Incorrect Email Or Password")
     
-    # User.query.filter_by(email='example@gmail.com').first() -test code 
 
     if not user and not check_password_hash(user.password, password):
         flash('Check info and try again!')
