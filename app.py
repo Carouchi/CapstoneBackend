@@ -145,10 +145,10 @@ def login():
         flash('Check info and try again!')
 
         login_user(user)
-        # return jsonify(User.dump(user))
-        return redirect('/blogs') 
+        return jsonify(User.dump(user))
+    return redirect('/blogs') 
         
-    return jsonify('user is logged in') 
+        # return jsonify('user is logged in') 
 
         # return redirect('/') #return value rather than redirect jsonify
 
