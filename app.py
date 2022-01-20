@@ -57,8 +57,8 @@ posts_schema = PostSchema(many=True)
 @app.route('/blog', methods=["POST"])
 # @cross_origin()
 def add_post():
-    title = request.json('title') # there were [] here prior
-    content = request.json('content') # there were [] here prior
+    title = request.json['title']
+    content = request.json['content']
 
     new_post = Post(title, content)
 
