@@ -148,16 +148,6 @@ def login():
         return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
-
-    token = generate_tokens()
-    ip = request.remote_addr
-    user.token = token
-    user.last_used_ip = ip
-    db.session.commit()
-
-    
-
-
     return redirect('/blogs')
 
 # Endpoint for user Registration
