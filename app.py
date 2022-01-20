@@ -131,8 +131,8 @@ def load_user(user_id):
 def login():
     
     #login_user(user)
-    email = request.form.get['email']
-    password = request.form.get['password']
+    email = request.form.get('email')
+    password = request.form.get('password')
     
     user = db.session.query(User).filter(User.email == email).first()
     
