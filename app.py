@@ -134,7 +134,7 @@ def login():
     post_data = request.get_json()
     email = post_data.get('email')
     password = post_data.get('password')
-    print(request, email, password)
+    print(post_data, email, password)
     user = db.session.query(User).filter(User.email == email).first()
     
     if user is None:
@@ -148,7 +148,7 @@ def login():
         return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
-    return redirect('/blogs')
+    return jsonify('user is logged in') 
 
 # Endpoint for user Registration
 # class Register(db.Model):
