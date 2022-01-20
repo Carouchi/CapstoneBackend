@@ -41,13 +41,14 @@ class Post(db.Model):
     title = db.Column(db.String(100), unique=False)
     content = db.Column(db.String(1000), unique=False)
 
-    def __init__(self, title, content):
+    def __init__(self, id, title, content):
+        self.id = id
         self.title = title
         self.content = content
 
 class PostSchema(ma.Schema):
     class Meta:
-        fields = ('title', 'content')
+        fields = ('id','title', 'content')
 
 
 post_schema = PostSchema()
@@ -57,10 +58,11 @@ posts_schema = PostSchema(many=True)
 @app.route('/blog', methods=["POST"])
 # @cross_origin()
 def add_post():
+    id = request.json['id']
     title = request.json['title']
     content = request.json['content']
 
-    new_post = Post(title, content)
+    new_post = Post(id, title, content)
 
     db.session.add(new_post)
     db.session.commit()
@@ -91,9 +93,11 @@ def get_post(id):
 # @cross_origin()
 def post_update(id):
     post = Post.query.get(id)
+    id = request.json['id']
     title = request.json['title']
     content = request.json['content']
 
+    post.id = id
     post.title = title
     post.content = content
 
