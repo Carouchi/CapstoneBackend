@@ -180,8 +180,6 @@ def login():
 
 # Endpoint for user Logout
 @app.route('/navigation')
-@cross_origin()
-@login_required
 def logout():
     logout_user()
     return redirect('/')
