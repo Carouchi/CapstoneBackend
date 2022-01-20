@@ -131,8 +131,8 @@ def load_user(user_id):
 def login():
     
     #login_user(user)
-    email = request.form.get('email')
-    password = request.form.get('password')
+    email = request.form.get['email']
+    password = request.form.get['password']
     
     user = db.session.query(User).filter(User.email == email).first()
     
@@ -173,16 +173,6 @@ def logout():
     logout_user()
     return redirect('/login')
 
-
-# # test add user
-# # with app.app_context():
-#     db.create_all()
-#     if db.session.query(User).filter_by(email='example@gmail.com').count() < 1:
-#         db.session.add(User(
-#           email='example@gmail.com',
-#           password='example',
-#             ))
-#     db.session.commit()
 
 
 if __name__ == '__main__':
