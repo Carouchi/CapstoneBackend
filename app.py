@@ -134,7 +134,7 @@ def login():
     email = request.form.get('email')
     password = request.form.get('password')
     
-    user = db.session.query(User).filter(email == email).first()
+    user = db.session.query(User).filter(User.email == email).first()
     
     if user is None:
         return jsonify("Incorrect Email Or Password")
