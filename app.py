@@ -1,5 +1,7 @@
 from enum import unique
 from importlib import resources
+from lib2to3.pgen2 import token
+from lib2to3.pgen2.tokenize import generate_tokens
 from flask import Flask, json, request, jsonify
 from flask.helpers import flash
 from flask.templating import render_template
@@ -131,12 +133,25 @@ def login():
     email = request.form.get('email')
     password = request.form.get('password')
     
-    user = User.query.filter_by(email='example@gmail.com').first()
+    user = db.session.query(User).filter(User.email == email).first()
+    if user is None:
+        return jsonify("Incorrect Email Or Password")
+    
+    # User.query.filter_by(email='example@gmail.com').first() -test code 
 
     if not user and not check_password_hash(user.password, password):
         flash('Check info and try again!')
-        return redirect('/')
+        return redirect('/') #return value rather than redirect jsonify
 
+
+    token = generate_tokens()
+    ip = request.remote_addr
+    user.token = token
+    user.last_used_ip = ip
+    db.session.commit()
+
+    return jsonify(User.dump(user))
+    
     login_user(user)
 
     return redirect('/blogs')
