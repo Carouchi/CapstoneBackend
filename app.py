@@ -141,7 +141,9 @@ def login():
 
     if not user and not check_password_hash(user.password, password):
         flash('Check info and try again!')
-        return redirect('/') #return value rather than redirect jsonify
+
+        return jsonify(User.dump(user))
+        # return redirect('/') #return value rather than redirect jsonify
 
 
     token = generate_tokens()
@@ -150,7 +152,7 @@ def login():
     user.last_used_ip = ip
     db.session.commit()
 
-    return jsonify(User.dump(user))
+    # return jsonify(User.dump(user))
     
     login_user(user)
 
