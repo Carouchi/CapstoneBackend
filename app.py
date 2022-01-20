@@ -145,26 +145,26 @@ def login():
         flash('Check info and try again!')
 
     login_user(user)
-    return jsonify(User.dump(user))
+    return redirect('/blogs')
+
+    # return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
-    return redirect('/blogs')
 
 # Endpoint for user Registration
 # class Register(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
 #     email = db.Column(db.String(200), unique=True)
 #     password = db.Column(db.String(200), nullable=False)
-
 # @app.route('/register', methods=['GET', 'POST'])
-# @cross_origin()
+# # @cross_origin()
 # def register():
     
-#     form = Register()
+#      form = Register()
     
-#     new_user = User(email=form.email.data, password=form.password.data)
-#     db.session.add(new_user)
-#     db.session.commit()
+#      new_user = User(email=form.email.data, password=form.password.data)
+#      db.session.add(new_user)
+#      db.session.commit()
 
     
 
