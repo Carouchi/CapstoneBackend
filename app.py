@@ -122,7 +122,8 @@ class User(db.Model, UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    if user_id is not None:
+        return User.query.get(int(user_id))
 
 
 @app.route('/login', methods=["POST"])
@@ -134,6 +135,7 @@ def login():
     password = request.form.get('password')
     
     user = db.session.query(User).filter(User.email == email).first()
+    
     if user is None:
         return jsonify("Incorrect Email Or Password")
     
@@ -141,7 +143,7 @@ def login():
 
     if not user and not check_password_hash(user.password, password):
         flash('Check info and try again!')
-        
+
         login_user(user)
         return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
@@ -176,13 +178,13 @@ def login():
 
     
 
-# # Endpoint for user Logout
-# @app.route('/navigation')
-# @cross_origin()
-# @login_required
-# def logout():
-#     logout_user()
-#     return redirect('/')
+# Endpoint for user Logout
+@app.route('/navigation')
+@cross_origin()
+@login_required
+def logout():
+    logout_user()
+    return redirect('/')
 
 
 # # test add user
