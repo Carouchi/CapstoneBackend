@@ -134,7 +134,7 @@ def login():
     post_data = request.get_json()
     email = post_data.get('email')
     password = post_data.get('password')
-    
+    print(email, password)
     user = db.session.query(User).filter(User.email == email).first()
     
     if user is None:
