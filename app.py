@@ -148,7 +148,7 @@ def login():
         return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
-    return jsonify('/blogs') 
+    return redirect('/blogs') 
 
 # Endpoint for user Registration
 # class Register(db.Model):
