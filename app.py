@@ -144,7 +144,7 @@ def login():
     if not user and not check_password_hash(user.password, password):
         flash('Check info and try again!')
 
-        login_user(User)
+        login_user(user)
         return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
