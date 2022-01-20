@@ -182,7 +182,7 @@ def login():
 @app.route('/navigation')
 def logout():
     logout_user()
-    # return redirect('/')
+    return redirect('/login')
 
 
 # # test add user
