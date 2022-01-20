@@ -179,7 +179,7 @@ def login():
     
 
 # Endpoint for user Logout
-@app.route('/navigation')
+@app.route('/navigation',  methods=["GET"])
 def logout():
     logout_user()
     return redirect('/')
