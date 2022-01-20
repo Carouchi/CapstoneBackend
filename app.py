@@ -144,11 +144,11 @@ def login():
     if not user and not check_password_hash(user.password, password):
         flash('Check info and try again!')
 
-        login_user(user)
-        return jsonify(User.dump(user))
+    login_user(user)
+    return jsonify('user is logged in') 
+    return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
-    return jsonify('user is logged in') 
 
 # Endpoint for user Registration
 # class Register(db.Model):
