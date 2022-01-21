@@ -58,11 +58,11 @@ posts_schema = PostSchema(many=True)
 @app.route('/blog', methods=["POST"])
 # @cross_origin()
 def add_post():
-    # id = request.json['id']ERR_FAILED 200
+    id = request.json['id']
     title = request.json['title']
     content = request.json['content']
 
-    new_post = Post(title, content)
+    new_post = Post(id, title, content)
 
     db.session.add(new_post)
     db.session.commit()
