@@ -15,7 +15,7 @@ from sqlalchemy import true
 from werkzeug import routing
 from werkzeug.security import check_password_hash
 from flask_cors import CORS, cross_origin
-
+from flask_bcrypt import bcrypt, Bcrypt
 from werkzeug.utils import redirect
 
 
@@ -148,7 +148,7 @@ def login():
         return jsonify("Incorrect Email Or Password")
     
 
-    if not user and not check_password_hash(User.password, password):
+    if bcrypt.check_password_hash(User.password, password) == False:
         flash('Check info and try again!')
 
         login_user(user)
