@@ -149,12 +149,11 @@ def login():
         return jsonify("Incorrect Email Or Password")
     
 
-    if user and not check_password_hash(User.password, password):
+    if not user and not check_password_hash(User.password, password):
         flash('Check info and try again!')
 
     login_user(user)
-    return jsonify(User.dump(user))("created")
-    # return jsonify(User.dump(user))
+    return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
     return redirect('/blogs') 
