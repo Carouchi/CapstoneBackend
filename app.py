@@ -152,8 +152,8 @@ def login():
         return jsonify('User not verified')
         # flash('Check info and try again!')
 
+    login_user(user)
     return jsonify('User has been verified')
-        # login_user(user)
         # return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
