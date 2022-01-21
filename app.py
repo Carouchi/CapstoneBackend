@@ -133,7 +133,7 @@ def load_user(user_id):
         return User.query.get(int(user_id))
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=["POST"])
 # @cross_origin()
 def login():
     
@@ -145,19 +145,17 @@ def login():
     user = db.session.query(User).filter(User.email == email).first()
     
     if user is None:
-        return jsonify('Incorrect Email Or Password')
+        return jsonify("Incorrect Email Or Password")
     
 
-    if bcrypt.check_password_hash(User.password, password) == False:
-        return jsonify('User not verified')
-        # flash('Check info and try again!')
+    if not user and not check_password_hash(User.password, password):
+        flash('Check info and try again!')
 
-    login_user(user)
-    return jsonify('User has been verified')
-        # return jsonify(User.dump(user))
+        login_user(user)
+        return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
-    # return redirect('/blogs') 
+    return redirect('/blogs') 
 
 # Endpoint for user Registration
 # class Register(db.Model):
