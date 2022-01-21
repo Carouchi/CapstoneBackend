@@ -1,3 +1,4 @@
+from flask import Flask
 from enum import unique
 from importlib import resources
 from lib2to3.pgen2 import token
@@ -32,6 +33,8 @@ app.config['SECRET_KEY'] = 'secretkey'
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 CORS(app)
+
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -145,7 +148,7 @@ def login():
         return jsonify("Incorrect Email Or Password")
     
 
-    if not user and not check_password_hash(user.password, password):
+    if not user and not check_password_hash(User.password, password):
         flash('Check info and try again!')
 
         login_user(user)
