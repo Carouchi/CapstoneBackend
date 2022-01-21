@@ -1,3 +1,4 @@
+import imp
 from flask import Flask
 from enum import unique
 from importlib import resources
@@ -15,7 +16,7 @@ from sqlalchemy import true
 from werkzeug import routing
 from werkzeug.security import check_password_hash
 from flask_cors import CORS, cross_origin
-
+from flask_bcrypt import bcrypt, Bcrypt
 from werkzeug.utils import redirect
 
 
@@ -148,11 +149,12 @@ def login():
         return jsonify("Incorrect Email Or Password")
     
 
-    if not user and not check_password_hash(User.password, password):
+    if user and not check_password_hash(User.password, password):
         flash('Check info and try again!')
 
-        login_user(user)
-        return jsonify(User.dump(user))
+    login_user(user)
+    return jsonify("created")
+        # return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
 
     return redirect('/blogs') 
@@ -162,15 +164,15 @@ def login():
 #     id = db.Column(db.Integer, primary_key=True)
 #     email = db.Column(db.String(200), unique=True)
 #     password = db.Column(db.String(200), nullable=False)
-# @app.route('/register', methods=['GET', 'POST'])
-# # @cross_origin()
-# def register():
+#     @app.route('/register', methods=['GET', 'POST'])
+#  # @cross_origin()
+#     def register():
     
-#      form = Register()
+#         form = Register()
     
-#      new_user = User(email=form.email.data, password=form.password.data)
-#      db.session.add(new_user)
-#      db.session.commit()
+#     new_user = User(email=form.email.data, password=form.password.data)
+#     db.session.add(new_user)
+#     db.session.commit()
 
     
 
