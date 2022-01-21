@@ -151,10 +151,10 @@ def login():
     if not user and not check_password_hash(User.password, password):
         flash('Check info and try again!')
 
-
+        login_user(user)
+        return jsonify(User.dump(user))
         # return redirect('/') #return value rather than redirect jsonify
-    login_user(user)
-    return jsonify(User.dump(user))
+
     return redirect('/blogs') 
 
 # Endpoint for user Registration
