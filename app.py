@@ -145,9 +145,8 @@ def load_user(user_id):
 
 
 @app.route('/login', methods=["POST"])
-def login():
+def login(user):
     
-    #login_user(user)
     post_data = request.get_json()
     email = post_data.get('email')
     password = post_data.get('password')
