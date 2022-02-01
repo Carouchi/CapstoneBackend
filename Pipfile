@@ -12,7 +12,6 @@ flask-login = "*"
 cors = "*"
 flask-cors = "*"
 gunicorn = "*"
-flask-bcrypt = "*"
 
 [dev-packages]
 
