@@ -162,9 +162,9 @@ def login():
     if not user and not check_password_hash(User.password, password) == False:
         return jsonify('Check info and try again!')
 
+    login_user(user)
     
     return jsonify('User has been logged in')
-    login_user(user)
     # return jsonify(user.dump(User))
     # return redirect('/blogs') 
 
