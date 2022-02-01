@@ -152,18 +152,20 @@ def login():
     email = post_data.get('email')
     password = post_data.get('password')
     print(post_data, email, password)
+
     user = db.session.query(User).filter(User.email == email).first()
     
     if user is None:
         return jsonify("Incorrect Email Or Password")
     
 
-    if not user and not check_password_hash(User.password, password):
-        flash('Check info and try again!')
+    if not user and not check_password_hash(User.password, password) == False:
+        return jsonify('Check info and try again!')
 
     
+    return jsonify('User has been logged in')
     login_user(user)
-    return jsonify(user.dump(User))
+    # return jsonify(user.dump(User))
     # return redirect('/blogs') 
 
 # Endpoint for user Registration
