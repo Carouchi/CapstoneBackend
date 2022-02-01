@@ -165,7 +165,7 @@ def login():
     login_user(user)
 
     
-    return jsonify("created")
+    return jsonify("logged in")
     # return redirect('/blogs')
 
     # return jsonify(user.dump(User))
