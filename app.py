@@ -163,8 +163,11 @@ def login():
         return jsonify('Check info and try again!')
 
     login_user(user)
+
+    return redirect('/blogs')
     
     return jsonify('User has been logged in')
+
     # return jsonify(user.dump(User))
     # return redirect('/blogs') 
 
