@@ -135,7 +135,6 @@ def load_user(user_id):
 
 
 @app.route('/login', methods=["POST"])
-# @cross_origin()
 def login():
     
     #login_user(user)
@@ -152,9 +151,10 @@ def login():
     if not user and not check_password_hash(User.password, password):
         flash('Check info and try again!')
 
-        login_user(user)
-        return jsonify(User.dump(user))
-    return redirect('/blogs') 
+    
+    login_user(user)
+    return jsonify(User.dump(user))
+    # return redirect('/blogs') 
 
 # Endpoint for user Registration
 # class Register(db.Model):
