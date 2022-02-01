@@ -123,6 +123,17 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(200), unique=True)
     password = db.Column(db.String(200), nullable=False)
+
+    def __init__(self, email, password):
+        self.email = email
+        self.password = password
+
+    class UserSchema(ma.Schema):
+        class Meta:
+            fields = ('id', 'username', 'password')
+
+    user_schema = UserSchema()
+    multiple_user_schema = UserSchema(many=True)
     
 
 # Endpoint for user Login
@@ -152,7 +163,7 @@ def login():
 
     
     login_user(user)
-    return jsonify(User.dump(user))
+    return jsonify(user.dump(User))
     # return redirect('/blogs') 
 
 # Endpoint for user Registration
