@@ -128,12 +128,12 @@ class User(db.Model, UserMixin):
         self.email = email
         self.password = password
 
-    class UserSchema(ma.Schema):
-        class Meta:
-            fields = ('id', 'username', 'password')
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'username', 'password')
 
-    user_schema = UserSchema()
-    multiple_user_schema = UserSchema(many=True)
+user_schema = UserSchema()
+multiple_user_schema = UserSchema(many=True)
     
 
 # Endpoint for user Login
@@ -165,7 +165,9 @@ def login():
 
     redirect('/blogs')
     
-    return jsonify("logged in")
+    return user_schema.jsonify(User)
+    
+    # return jsonify("logged in")
 
     # return jsonify(user.dump(User))
     # return redirect('/blogs') 
