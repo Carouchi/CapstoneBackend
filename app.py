@@ -162,10 +162,10 @@ def login():
         return jsonify('Check info and try again!')
 
     login_user(user)
-
+    
     redirect('/blogs')
     
-    return jsonify (user_schema.dump(user))
+    return jsonify (user_schema.dump(User))
     
     # return jsonify("logged in")
 
