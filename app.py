@@ -165,7 +165,7 @@ def login():
 
     redirect('/blogs')
     
-    return user_schema.jsonify(user)
+    return jsonify (user_schema.dump(user))
     
     # return jsonify("logged in")
 
